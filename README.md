@@ -57,6 +57,9 @@ Default project roots:
 - [ ] Add installation guide in README.md
   - [ ] packer.nvim
 - [ ] Customizable
+  - [ ] ignore list
+    - [ ] filetype
+    - [ ] buftype
   - [ ] keymappings
   - [ ] go up levels
 - [ ] Make it works on Vim too (if possible)
