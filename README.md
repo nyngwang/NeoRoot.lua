@@ -36,9 +36,9 @@ __Disclaimer__: This plugin is still in very-early stage. I have only confirmed 
 ### Compatibility
 
 - Work with
-  - dashboard.nvim
-  - nvim-tree.lua
-  - fzf-lua (highly recommended)
+  - [glepnir/dashboard-nvim](https://github.com/glepnir/dashboard-nvim)
+  - [kyazdani42/nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)
+  - [ibhagwan/fzf-lua](https://github.com/ibhagwan/fzf-lua), __highly recommended__
 
 ### Usage: Shortcuts & Defaults
 
