@@ -1,6 +1,12 @@
 NeoRoot.lua
 ---
 
+### DEMO
+
+https://user-images.githubusercontent.com/24765272/147693438-00688642-b4c7-4d09-93a2-9aed009b314c.mov
+
+### Intro.
+
 This plugin will:
 
 1. Change your _current working directory_ to the buffer your cursor is on
@@ -45,10 +51,4 @@ Default project roots:
 
 - `_G.__PROJECT_ROOT`: `{ }`
   - how to append: `<Leader>pra` and then enter `whatever_folder_name`, __not path__, as project root
-
-### DEMO
-
-https://user-images.githubusercontent.com/24765272/147693438-00688642-b4c7-4d09-93a2-9aed009b314c.mov
-
-
 
