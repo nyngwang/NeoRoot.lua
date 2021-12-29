@@ -31,10 +31,10 @@ function _G.change_cwd_to_grandparent()
     and vim.opt.filetype ~= "dashboard"
     and vim.opt.filetype ~= "NvimTree"
   ) then
-    local test_path = "%:p:h"
+    local test_path = "%:p"
     local count = 0
     while (
-      count+1 <= 2
+      count+1 <= 3
       and string.len(vim.fn.expand(test_path .. ":h")) >= string.len(vim.fn.expand("$HOME"))
     ) do
       local found_root = false
@@ -49,6 +49,7 @@ function _G.change_cwd_to_grandparent()
       test_path = test_path .. ":h"
       count = count + 1
     end
+    if count == 0 then test_path = test_path .. ":h" end
     vim.api.nvim_set_current_dir(vim.fn.expand(test_path))
   end
 end
