@@ -20,7 +20,7 @@ __Disclaimer__: This plugin is still in very-early stage. I have only confirmed 
 
 ### Features
 
-- Automatically set your `cwd` three-level up (`%:p:h:h:h`) according to the buffer your cursor is on,
+- Automatically set your `cwd` two-level up (`%:p:h:h:h`) according to the buffer your cursor is on,
   while it will never _go beyond_ the project roots you setup.
 - When you do "project root append"(`<Leader>pra`), the `pwd` printed in the cmdline will get updated immediately
 - Always display the result of `pwd` in cmdline (You might not like this, I'm going to set this as a toggle)
