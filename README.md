@@ -1,8 +1,13 @@
 NeoRoot.lua
 ---
 
-This plugin will: 1. Change your current working directory to the current buffer and 2. __Level it up within__ the project roots __you define__.
-So now you don't have to run `:cd` again to see more files before running commands that facilitate `rg` or `fd`.
+This plugin will:
+
+1. Change your _current working directory_ to the buffer your cursor is on
+2. Try to go up 2 levels __but stop__ after it encounters one of the project roots __you define__
+
+Now you won't have a hard time `:cd` to the right place to see more files before executing commands that takes your current working directory into account
+ (i.e. you need to go up some levels to make tools like `rg`/`fd` to "see" more files).
 You can also change your defaults __in the runtime__, so you can temporarily pin a folder like `Project/src/` as root with ease.
 
 __Disclaimer__: This plugin is still in very-early stage. I have only confirmed that it works after installation.
