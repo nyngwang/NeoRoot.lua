@@ -1,11 +1,9 @@
 NeoRoot.lua
 ---
 
-Keep your `cwd` in the right place by defining your own project roots, dynamically or statically :)
+Keep your `cwd` in the right place by defining your own default project roots in your config. __And__ you can change your mind in the runtime :)
 
-### Disclamer
-
-This is my first plugin for neovim. I just copy-paste the code from my working `init.lua`, so I'm not even sure about whether you could install it successfully or not, but I will try my best to make it work recently.
+__WARNING__: I just copy-pasted the code from my working `init.lua`. It might not work after installation.
 
 ### Features
 
