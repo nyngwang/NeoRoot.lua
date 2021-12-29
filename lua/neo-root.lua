@@ -37,19 +37,18 @@ function _G.change_cwd_to_grandparent()
       count+1 <= 3
       and string.len(vim.fn.expand(test_path .. ":h")) >= string.len(vim.fn.expand("$HOME"))
     ) do
+      test_path = test_path .. ":h"
+      count = count + 1
       local found_root = false
       for idx = 1, #_G.__PROJECT_ROOT do
-        local _, last = string.find(vim.fn.expand(test_path .. ":h"), _G.__PROJECT_ROOT[idx], nil, true)
-        if string.len(vim.fn.expand(test_path .. ":h")) == last then
+        local _, last = string.find(vim.fn.expand(test_path), _G.__PROJECT_ROOT[idx], nil, true)
+        if string.len(vim.fn.expand(test_path)) == last then
             found_root = true
             break
         end
       end
       if found_root then break end
-      test_path = test_path .. ":h"
-      count = count + 1
     end
-    if count == 0 then test_path = test_path .. ":h" end
     vim.api.nvim_set_current_dir(vim.fn.expand(test_path))
   end
 end
