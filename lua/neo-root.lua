@@ -6,8 +6,6 @@ vim.cmd'au CursorHold * pwd'
 vim.cmd'au BufEnter * call v:lua.change_cwd_to_grandparent()'
 vim.api.nvim_set_keymap('n', '<Leader>prr', '<cmd>lua _G.reset_project_root(); print("Project Root Has Been Reset"); _G.change_cwd_to_grandparent()<CR>', NOREF_NOERR_TRUNC)
 _G.__PROJECT_ROOT_CONST = {
-  "GitHub",
-  "GitHub-2",
 }
 function _G.reset_project_root()
   for k in pairs(_G.__PROJECT_ROOT) do
@@ -25,8 +23,6 @@ function _G.reset_project_root()
 end
 vim.api.nvim_set_keymap('n', '<Leader>pra', '<cmd>lua table.insert(_G.__PROJECT_ROOT, vim.fn.input("Extend Project Root: ")); _G.change_cwd_to_grandparent()<CR>', NOREF_NOERR_TRUNC)
 _G.__PROJECT_ROOT = {
-  "GitHub",
-  "GitHub-2",
 }
 function _G.change_cwd_to_grandparent()
   if (
