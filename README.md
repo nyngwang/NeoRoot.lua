@@ -26,6 +26,7 @@ __Disclaimer__: This plugin is still in very-early stage. I have only confirmed 
 - Work with
   - dashboard.nvim
   - nvim-tree.lua
+  - fzf-lua (highly recommended)
 
 ### Usage: Shortcuts & Defaults
 
