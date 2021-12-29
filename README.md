@@ -52,3 +52,14 @@ Default project roots:
 - `_G.__PROJECT_ROOT`: `{ }`
   - how to append: `<Leader>pra` and then enter `whatever_folder_name`, __not path__, as project root
 
+### TODO list
+
+- [ ] Add installation guide in README.md
+  - [ ] packer.nvim
+- [ ] Customizable
+  - [ ] keymappings
+  - [ ] go up levels
+- [ ] Make it works on Vim too (if possible)
+- [ ] Learn and use commit template
+- [ ] Design a logo for it
+
