@@ -3,10 +3,9 @@ local NOREF_NOERR = { noremap = true, silent = true }
 local EXPR_NOREF_NOERR_TRUNC = { expr = true, noremap = true, silent = true, nowait = true }
 ---------------------------------------------------------------------------------------------------
 
-vim.cmd'au BufEnter * echo getcwd()'
 vim.cmd'au BufEnter * call v:lua.blue_pill_or_red_pill()'
 _G.__CURRENT_MODE = 'RED_PILL'
-vim.api.nvim_set_keymap('n', '<Leader>;', '<cmd>lua _G.change_pill(); _G.blue_pill_or_red_pill()<CR>', NOREF_NOERR_TRUNC)
+vim.api.nvim_set_keymap('n', '<Leader>p', '<cmd>lua _G.change_pill(); _G.blue_pill_or_red_pill(); print(vim.fn.getcwd())<CR>', NOREF_NOERR_TRUNC)
 function _G.change_pill()
   if _G.__CURRENT_MODE == 'BLUE_PILL' then
     _G.__CURRENT_MODE = 'RED_PILL'
