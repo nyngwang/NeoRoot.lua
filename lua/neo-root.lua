@@ -2,9 +2,12 @@ local NOREF_NOERR_TRUNC = { noremap = true, silent = true, nowait = true }
 local NOREF_NOERR = { noremap = true, silent = true }
 local EXPR_NOREF_NOERR_TRUNC = { expr = true, noremap = true, silent = true, nowait = true }
 
-vim.cmd'au CursorHold * pwd'
-vim.cmd'au BufEnter * call v:lua.change_cwd_to_grandparent()'
-vim.api.nvim_set_keymap('n', '<Leader>prr', '<cmd>lua _G.reset_project_root(); print("Project Root Has Been Reset"); _G.change_cwd_to_grandparent()<CR>', NOREF_NOERR_TRUNC)
+-- vim.cmd'au CursorHold * pwd'
+vim.cmd'au BufEnter * call v:lua.blue_pill_or_red_pill()'
+_G.__CURRENT_MODE = 'BLUE_PILL'
+vim.api.nvim_set_keymap('n', '<Leader>prtr', '<cmd>lua _G.__CURRENT_MODE = "RED_PILL"; _G.blue_pill_or_red_pill()<CR>', NOREF_NOERR_TRUNC)
+vim.api.nvim_set_keymap('n', '<Leader>prtb', '<cmd>lua _G.__CURRENT_MODE = "BLUE_PILL"; _G.blue_pill_or_red_pill()<CR>', NOREF_NOERR_TRUNC)
+vim.api.nvim_set_keymap('n', '<Leader>prr', '<cmd>lua _G.reset_project_root(); _G.blue_pill_or_red_pill()<CR>', NOREF_NOERR_TRUNC)
 _G.__PROJECT_ROOT_CONST = {
 }
 function _G.reset_project_root()
@@ -21,16 +24,20 @@ function _G.reset_project_root()
     end
   end
 end
-vim.api.nvim_set_keymap('n', '<Leader>pra', '<cmd>lua table.insert(_G.__PROJECT_ROOT, vim.fn.input("Extend Project Root: ")); _G.change_cwd_to_grandparent()<CR>', NOREF_NOERR_TRUNC)
+vim.api.nvim_set_keymap('n', '<Leader>pra', '<cmd>lua table.insert(_G.__PROJECT_ROOT, vim.fn.input("Extend Project Root: ")); _G.blue_pill_or_red_pill()<CR>', NOREF_NOERR_TRUNC)
 _G.__PROJECT_ROOT = {
 }
-function _G.change_cwd_to_grandparent()
+function _G.blue_pill_or_red_pill()
   if (
     -- Don't use `string.find` or you will match when `vim.bo.buftype` is `''` empty string!
     vim.bo.buftype ~= "terminal"
     and vim.opt.filetype ~= "dashboard"
     and vim.opt.filetype ~= "NvimTree"
   ) then
+    if _G.__CURRENT_MODE == 'RED_PILL' then
+      vim.api.nvim_set_current_dir(vim.fn.expand("%:p:h"))
+      return
+    end
     local test_path = "%:p"
     local count = 0
     while (
