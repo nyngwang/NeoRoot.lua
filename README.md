@@ -46,6 +46,11 @@ Two shortcuts only, customizable:
 
 - `<Leader>prr`, where `prr` means "project root reset"
 - `<Leader>pra`, where `pra` means "project root append"
+- `<Leader>p`, where `p` means "pill"
+  - blue pill mode: move to `%:p:h:h:h`
+  - red pill mode: stay at `%:p:h`
+
+__So, to see the `pwd` of the current mode, we have to run `<Leader>p` twice, sadly.__
 
 Default project roots:
 
