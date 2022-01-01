@@ -4,9 +4,15 @@ local EXPR_NOREF_NOERR_TRUNC = { expr = true, noremap = true, silent = true, now
 
 -- vim.cmd'au CursorHold * pwd'
 vim.cmd'au BufEnter * call v:lua.blue_pill_or_red_pill()'
-_G.__CURRENT_MODE = 'BLUE_PILL'
-vim.api.nvim_set_keymap('n', '<Leader>prtr', '<cmd>lua _G.__CURRENT_MODE = "RED_PILL"; _G.blue_pill_or_red_pill()<CR>', NOREF_NOERR_TRUNC)
-vim.api.nvim_set_keymap('n', '<Leader>prtb', '<cmd>lua _G.__CURRENT_MODE = "BLUE_PILL"; _G.blue_pill_or_red_pill()<CR>', NOREF_NOERR_TRUNC)
+_G.__CURRENT_MODE = 'RED_PILL'
+vim.api.nvim_set_keymap('n', '<Leader>pp', '<cmd>lua _G.change_pill(); _G.blue_pill_or_red_pill()<CR>', NOREF_NOERR_TRUNC)
+function _G.change_pill()
+  if _G.__CURRENT_MODE == 'BLUE_PILL' then
+    _G.__CURRENT_MODE = 'RED_PILL'
+  elseif _G.__CURRENT_MODE == 'RED_PILL' then
+    _G.__CURRENT_MODE = 'BLUE_PILL'
+  end
+end
 vim.api.nvim_set_keymap('n', '<Leader>prr', '<cmd>lua _G.reset_project_root(); _G.blue_pill_or_red_pill()<CR>', NOREF_NOERR_TRUNC)
 _G.__PROJECT_ROOT_CONST = {
 }
