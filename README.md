@@ -35,6 +35,7 @@ You can also change your defaults __in the runtime__, so you can temporarily pin
 
 - Work with
   - [glepnir/dashboard-nvim](https://github.com/glepnir/dashboard-nvim)
+  - [numToStr/FTerm.nvim](https://github.com/numtostr/FTerm.nvim)
   - [kyazdani42/nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)
   - [ibhagwan/fzf-lua](https://github.com/ibhagwan/fzf-lua), __highly recommended__
 
