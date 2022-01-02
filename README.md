@@ -16,8 +16,6 @@ Now you won't have a hard time `:cd` to the right place to see more files before
  (i.e. you need to go up some levels to make tools like `rg`/`fd` to "see" more files).
 You can also change your defaults __in the runtime__, so you can temporarily pin a folder like `Project/src/` as root with ease.
 
-__Disclaimer__: This plugin is still in very-early stage. I have only confirmed that it works after installation.
-
 ### Features
 
 - Automatically set your `cwd` two-level up (`%:p:h:h:h`) according to the buffer your cursor is on,
@@ -40,6 +38,16 @@ __Disclaimer__: This plugin is still in very-early stage. I have only confirmed 
   - [kyazdani42/nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)
   - [ibhagwan/fzf-lua](https://github.com/ibhagwan/fzf-lua), __highly recommended__
 
+### installation
+
+#### Packer.nvim
+
+```
+use {
+  'nyngwang/NeoRoot.lua'
+}
+```
+
 ### Usage: Shortcuts & Defaults
 
 Two shortcuts only, customizable:
@@ -59,8 +67,8 @@ Default project roots:
 
 ### TODO list
 
-- [ ] Add installation guide in README.md
-  - [ ] packer.nvim
+- [x] Add installation guide in README.md
+  - [x] packer.nvim
 - [ ] Customizable
   - [ ] ignore list
     - [ ] filetype
