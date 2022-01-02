@@ -37,8 +37,10 @@ function _G.blue_pill_or_red_pill()
   if (
     -- Don't use `string.find` or you will match when `vim.bo.buftype` is `''` empty string!
     vim.bo.buftype ~= "terminal"
-    and vim.opt.filetype ~= "dashboard"
-    and vim.opt.filetype ~= "NvimTree"
+    and vim.bo.filetype ~= "dashboard"
+    and vim.bo.filetype ~= "NvimTree"
+    -- Don't use `vim.opt.filetype`, since everyone set it locally.
+    and vim.bo.filetype ~= "FTerm"
   ) then
     if _G.__CURRENT_MODE == 'RED_PILL' then
       vim.api.nvim_set_current_dir(vim.fn.expand("%:p:h"))
