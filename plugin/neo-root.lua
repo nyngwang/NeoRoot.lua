@@ -1,8 +1,8 @@
-if vim.fn.has("nvim-0.5") == 0 then
+if vim.fn.has("nvim-0.7") == 0 then
   return
 end
 
-if vim.g.loaded_neorooter_nvim ~= nil then
+if vim.g.loaded_neoroot_nvim ~= nil then
   return
 end
 
@@ -10,4 +10,4 @@ end
 
 require('neo-root')
 
-vim.g.loaded_neorooter_nvim = 1
+vim.g.loaded_neoroot_nvim = 1
