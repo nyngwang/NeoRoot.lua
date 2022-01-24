@@ -62,6 +62,7 @@ end
 
 function M.change_project_root()
   USER_ROOT = vim.fn.input('Set Project Root: ')
+  CUR_MODE = BLUE_PILL
   if USER_ROOT ~= '' then -- reset
     vim.cmd('cd ' .. USER_ROOT)
   else
