@@ -55,7 +55,7 @@ local function execute_mode_behaviour()
 end
 
 local function apply_change()
-  M.execute()
+  _G.neo_root_execute()
   print(vim.cmd('pwd'))
 end
 ---------------------------------------------------------------------------------------------------
@@ -65,7 +65,7 @@ vim.api.nvim_set_keymap('n', '<Leader>prr', '<cmd>lua _G.reset_project_root(); _
 vim.api.nvim_set_keymap('n', '<Leader>pra',
 '<cmd>lua table.insert(_G.__PROJECT_ROOT, vim.fn.input("Extend Project Root: ")); _G.blue_pill_or_red_pill()<CR>', NOREF_NOERR_TRUNC)
 
-function M.execute()
+function _G.neo_root_execute()
   if not NEO_ZOOM_DID_INIT then
     init()
     NEO_ZOOM_DID_INIT = true
@@ -101,9 +101,9 @@ end
 
 local function setup_vim_commands()
   vim.cmd [[
-    command! NeoRoot lua require'neo-root'.execute()
-    command! NeoRootSwitchMode lua require'neo-root'.change_mode()
-    command! NeoRootChange lua require'neo-root'.change_project_root()
+    command! NeoRoot v:lua.neo_root_execute()
+    command! NeoRootSwitchMode lua require('neo-root').change_mode()
+    command! NeoRootChange lua require('neo-root').change_project_root()
   ]]
 end
 
