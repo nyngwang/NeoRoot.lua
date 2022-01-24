@@ -54,7 +54,10 @@ function M.change_project_root()
   if input:match('%s*') then return end
   -- should check path exist
   USER_ROOT = input
+  local old_mode = CUR_MODE
+  CUR_MODE = BLUE_PILL
   apply_change()
+  CUR_MODE = old_mode
 end
 
 local function setup_vim_commands()
