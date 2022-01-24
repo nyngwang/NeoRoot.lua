@@ -6,27 +6,20 @@ local EXPR_NOREF_NOERR_TRUNC = { expr = true, noremap = true, silent = true, now
 RED_PILL = 1
 BLUE_PILL = 2
 -- globals
-NEO_ZOOM_DID_INIT = false
-CUR_MODE = nil
-PROJ_ROOT = nil
+CUR_MODE = RED_PILL
+PROJ_ROOT = vim.fn.getcwd()
 USER_ROOT = ''
 
 local M = {}
 
-local function init()
-  CUR_MODE = RED_PILL
-  -- NOTE: Both `~`, `-`, `..` works with `vim.cmd`
-  PROJ_ROOT = vim.fn.getcwd()
-end
-
 local function execute_mode_behaviour()
   if CUR_MODE == RED_PILL then
-    vim.api.nvim_set_current_dir(vim.fn.expand('%:p:h'))
+    vim.cmd('cd ' .. vim.fn.expand('%:p:h'))
   else -- CUR_MODE == BLUE_PILL
     if USER_ROOT ~= '' then
-      vim.api.nvim_set_current_dir(USER_ROOT)
+      vim.cmd('cd ' .. USER_ROOT)
     else
-      vim.api.nvim_set_current_dir(PROJ_ROOT)
+      vim.cmd('cd ' .. PROJ_ROOT)
     end
   end
 end
@@ -37,10 +30,6 @@ local function apply_change()
 end
 ---------------------------------------------------------------------------------------------------
 function M.execute()
-  if not NEO_ZOOM_DID_INIT then
-    init()
-    NEO_ZOOM_DID_INIT = true
-  end
   -- NOTE: Don't use `string.find` to compare type, since empty string `''` will always match
   -- NOTE: Don't use `vim.opt.filetype`, since everyone set it locally.
   if vim.bo.buftype ~= "terminal" -- TODO: should be customizable
@@ -62,12 +51,8 @@ end
 
 function M.change_project_root()
   USER_ROOT = vim.fn.input('Set Project Root: ')
-  CUR_MODE = BLUE_PILL
-  if USER_ROOT ~= '' then -- reset
-    vim.api.nvim_set_current_dir(USER_ROOT)
-  else
-    vim.api.nvim_set_current_dir(PROJ_ROOT)
-  end
+  if USER_ROOT == '' then return end
+  vim.cmd('cd ' .. USER_ROOT)
   apply_change()
 end
 
