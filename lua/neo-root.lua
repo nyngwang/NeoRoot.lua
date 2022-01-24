@@ -7,8 +7,8 @@ RED_PILL = 1
 BLUE_PILL = 2
 -- globals
 CUR_MODE = RED_PILL
-PROJ_ROOT = vim.fn.getcwd()
-USER_ROOT = nil
+_PROJ_ROOT = vim.fn.getcwd()
+PROJ_ROOT = vim.fn.getcwd() -- will not save invalid
 
 local M = {}
 
@@ -16,11 +16,7 @@ local function execute_mode_behaviour()
   if CUR_MODE == RED_PILL then
     vim.cmd('cd ' .. vim.fn.expand('%:p:h'))
   else -- CUR_MODE == BLUE_PILL
-    if USER_ROOT ~= nil then
-      vim.cmd('cd ' .. USER_ROOT)
-    else
-      vim.cmd('cd ' .. PROJ_ROOT)
-    end
+    vim.cmd('cd ' .. PROJ_ROOT)
   end
 end
 
@@ -51,13 +47,13 @@ end
 
 function M.change_project_root()
   local input = vim.fn.input('Set Project Root: ')
-  if input:match('%s*') then return end
-  -- should check path exist
-  USER_ROOT = input
-  local old_mode = CUR_MODE
-  CUR_MODE = BLUE_PILL
-  apply_change()
-  CUR_MODE = old_mode
+  if input:match('%s*') then
+    PROJ_ROOT = _PROJ_ROOT
+  else
+    -- should check path exist
+    PROJ_ROOT = input
+  end
+  execute_mode_behaviour()
 end
 
 local function setup_vim_commands()
