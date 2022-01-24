@@ -9,7 +9,7 @@ BLUE_PILL = 2
 NEO_ZOOM_DID_INIT = false
 CUR_MODE = nil
 PROJ_ROOT = nil
-USER_ROOT = nil
+USER_ROOT = ''
 
 local M = {}
 
@@ -46,7 +46,7 @@ local function execute_mode_behaviour()
   if CUR_MODE == RED_PILL then
     vim.api.nvim_set_current_dir(vim.fn.expand('%:p:h'))
   else -- CUR_MODE == BLUE_PILL
-    if USER_ROOT ~= nil then
+    if USER_ROOT ~= '' then
       vim.api.nvim_set_current_dir(USER_ROOT)
     else
       vim.api.nvim_set_current_dir(PROJ_ROOT)
@@ -91,10 +91,10 @@ end
 
 function M.change_project_root()
   USER_ROOT = vim.fn.input('Set Project Root: ')
-  if USER_ROOT == nil then -- reset
-    vim.cmd('cd ' .. PROJ_ROOT)
-  else
+  if USER_ROOT ~= '' then -- reset
     vim.cmd('cd ' .. USER_ROOT)
+  else
+    vim.cmd('cd ' .. PROJ_ROOT)
   end
   apply_change()
 end
