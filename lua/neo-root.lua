@@ -94,7 +94,6 @@ function M.change_project_root()
 end
 
 local function setup_vim_commands()
-  vim.cmd'au BufEnter * NeoRoot'
   vim.cmd [[
     command! NeoRoot lua require('neo-root').execute()
     command! NeoRootSwitchMode lua require('neo-root').change_mode()
