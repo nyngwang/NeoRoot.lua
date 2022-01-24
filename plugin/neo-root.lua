@@ -1,4 +1,4 @@
-if vim.fn.has("nvim-0.7") == 0 then
+if vim.fn.has("nvim-0.5") == 0 then
   return
 end
 
