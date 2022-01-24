@@ -13,29 +13,6 @@ USER_ROOT = ''
 
 local M = {}
 
--- TODO: provide this in the next PR :P
-local function level_up(total_level)
-  local test_path = "%:p"
-  local count = 0
-  while (
-    count+1 <= total_level
-    and string.len(vim.fn.expand(test_path .. ":h")) >= string.len(vim.fn.expand("$HOME"))
-  ) do
-    test_path = test_path .. ":h"
-    count = count + 1
-    local found_root = false
-    for idx = 1, #_G.__PROJECT_ROOT do
-      local _, last = string.find(vim.fn.expand(test_path), _G.__PROJECT_ROOT[idx], nil, true)
-      if string.len(vim.fn.expand(test_path)) == last then
-          found_root = true
-          break
-      end
-    end
-    if found_root then break end
-  end
-  vim.api.nvim_set_current_dir(vim.fn.expand(test_path))
-end
-
 local function init()
   CUR_MODE = RED_PILL
   -- NOTE: Both `~`, `-`, `..` works with `vim.cmd`
