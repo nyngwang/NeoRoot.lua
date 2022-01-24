@@ -24,9 +24,9 @@ local function execute_mode_behaviour()
     vim.api.nvim_set_current_dir(vim.fn.expand('%:p:h'))
   else -- CUR_MODE == BLUE_PILL
     if USER_ROOT ~= '' then
-      vim.api.nvim_set_current_dir(USER_ROOT)
+      vim.cmd('cd ' .. USER_ROOT)
     else
-      vim.api.nvim_set_current_dir(PROJ_ROOT)
+      vim.cmd('cd ' .. PROJ_ROOT)
     end
   end
 end
