@@ -47,7 +47,7 @@ end
 
 function M.change_project_root()
   local input = vim.fn.input('Set Project Root: ')
-  if input:match('%s*') then
+  if (input == '' or input:match('%s+')) then
     PROJ_ROOT = _PROJ_ROOT
   else
     -- should check path exist
