@@ -56,7 +56,7 @@ end
 
 local function apply_change()
   M.execute()
-  print(vim.cmd('pwd'))
+  print(vim.fn.getcwd())
 end
 ---------------------------------------------------------------------------------------------------
 function M.execute()
