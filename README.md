@@ -1,35 +1,32 @@
 NeoRoot.lua
 ---
 
-### DEMO, with bg-music :)
+### DEMO
 
-https://user-images.githubusercontent.com/24765272/147872679-6ca99110-d7fa-44fe-80cf-5cf71a3093bb.mov
+TODO: update
 
-### Intro.
+### New Intro.
 
-This plugin will:
+With NeoRoot.lua, you will be able to:
 
-1. Change your _current working directory_ to the buffer your cursor is on
-2. Try to go up 2 levels __but stop__ after it encounters one of the project roots __you define__
+- Run `nvim MyProj` to open neovim with Project Root at `../somewhere/MyProj/`
+- During development, you can use toggle to temporarily change between `cwd` to your current buffer, and `../somewhere/MyProj/` .
+- During development, you can temporarily re-define your project root to, for example: `~/.config`. (shorthand `~`, `../`s are available :))
+  - if you want to change back to `../somewhere/MyProj/`, just leave the prompt blank. Simple
+- That's it!
+
+### Old Promo.
 
 Now you won't have a hard time `:cd` to the right place to see more files before executing commands that takes your current working directory into account
  (i.e. you need to go up some levels to make tools like `rg`/`fd` to "see" more files).
-You can also change your defaults __in the runtime__, so you can temporarily pin a folder like `Project/src/` as root with ease.
+You can also change your project root __in the runtime__, without typing any command, anymore!
 
 ### Features
 
-- Automatically set your `cwd` two-level up (`%:p:h:h:h`) according to the buffer your cursor is on,
-  while it will never _go beyond_ the project roots you setup.
-- When you do "project root append"(`<Leader>pra`), the `pwd` printed in the cmdline will get updated immediately
-- Always display the result of `pwd` in cmdline (You might not like this, I'm going to set this as a toggle)
-- Light-weight, < 100 lines
 - No dependencies
-
----
-
-### Requirements
-
-- Your `$HOME` should not be empty
+- No requirements
+- free
+- Light-weight, ~100 lines
 
 ### Compatibility
 
@@ -39,44 +36,28 @@ You can also change your defaults __in the runtime__, so you can temporarily pin
   - [kyazdani42/nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)
   - [ibhagwan/fzf-lua](https://github.com/ibhagwan/fzf-lua), __highly recommended__
 
-### installation
+### Setup
 
 #### Packer.nvim
 
-```
+```lua
+local NOREF_NOERR_TRUNC = { noremap = true, silent = true, nowait = true }
 use {
   'nyngwang/NeoRoot.lua'
 }
+vim.keymap.set('n', '<Leader>p', function() vim.cmd('NeoRootSwitchMode') end, NOREF_NOERR_TRUNC)
+vim.keymap.set('n', '<Leader>pre', function() vim.cmd('NeoRootChange') end, NOREF_NOERR_TRUNC)
 ```
 
-### Usage: Shortcuts & Defaults
+### Hint
 
-Two shortcuts only, customizable:
-
-- `<Leader>prr`, where `prr` means "project root reset"
-- `<Leader>pra`, where `pra` means "project root append"
-- `<Leader>p`, where `p` means "pill"
-  - blue pill mode: move to `%:p:h:h:h`
-  - red pill mode: stay at `%:p:h`
-
-__So, to see the `pwd` of the current mode, we have to run `<Leader>p` twice, sadly.__
-
-Default project roots:
-
-- `_G.__PROJECT_ROOT`: `{ }`
-  - how to append: `<Leader>pra` and then enter `whatever_folder_name`, __not path__, as project root
+To see your current working directory, simply call `NeoRootSwitchMode` twice.
 
 ### TODO list
 
 - [x] Add installation guide in README.md
   - [x] packer.nvim
-- [ ] Customizable
+- [x] Customizable
+  - [x] keymappings
   - [ ] ignore list
-    - [ ] filetype
-    - [ ] buftype
-  - [ ] keymappings
-  - [ ] go up levels
-- [ ] Make it works on Vim too (if possible)
-- [ ] Learn and use commit template
-- [ ] Design a logo for it
 
