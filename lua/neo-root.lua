@@ -8,17 +8,9 @@ BLUE_PILL = 2
 -- globals
 CUR_MODE = RED_PILL
 _PROJ_ROOT = vim.fn.getcwd()
-PROJ_ROOT = vim.fn.getcwd() -- will not save invalid
+PROJ_ROOT = vim.fn.getcwd() -- this cannot be relative path!
 
 local M = {}
-
-local function execute_mode_behaviour()
-  if CUR_MODE == RED_PILL then
-    vim.cmd('cd ' .. vim.fn.expand('%:p:h'))
-  else -- CUR_MODE == BLUE_PILL
-    vim.cmd('cd ' .. PROJ_ROOT)
-  end
-end
 
 local function apply_change()
   M.execute()
@@ -32,7 +24,11 @@ function M.execute()
     and vim.bo.filetype ~= "dashboard"
     and vim.bo.filetype ~= "NvimTree"
     and vim.bo.filetype ~= "FTerm" then
-    execute_mode_behaviour()
+    if CUR_MODE == RED_PILL then
+      vim.cmd('cd ' .. vim.fn.expand('%:p:h'))
+    else -- CUR_MODE == BLUE_PILL
+      vim.cmd('cd ' .. PROJ_ROOT)
+    end
   end
 end
 
@@ -47,13 +43,25 @@ end
 
 function M.change_project_root()
   local input = vim.fn.input('Set Project Root: ')
-  if (input == '' or input:match('%s+')) then
+  if (input == '' or input:match('%s+')) then -- reset signal
     PROJ_ROOT = _PROJ_ROOT
-  else
-    -- should check path exist
-    PROJ_ROOT = input
+    apply_change()
+    return
   end
-  execute_mode_behaviour()
+
+  if input:sub(1,2) == './' or input:sub(1,3) == '../' then -- relative path
+    local cwd = vim.fn.getcwd()
+    if cwd:sub(-1) == '/' then
+      vim.cmd('cd ' .. cwd ..  input)
+    else
+      vim.cmd('cd ' .. cwd .. '/' .. input)
+    end
+  else -- the last case `~`
+    vim.cmd('cd ' .. input)
+  end
+  -- `PROJ_ROOT` only store normalized result
+  PROJ_ROOT = vim.fn.getcwd()
+  apply_change()
 end
 
 local function setup_vim_commands()
