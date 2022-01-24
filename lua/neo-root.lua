@@ -37,9 +37,9 @@ local function level_up(total_level)
 end
 
 local function init()
-  CUR_MODE = BLUE_PILL
+  CUR_MODE = RED_PILL
   -- NOTE: Both `~`, `-`, `..` works with `vim.cmd`
-  PROJ_ROOT = print(vim.cmd('pwd')) -- might have bug
+  PROJ_ROOT = vim.fn.getcwd()
 end
 
 local function execute_mode_behaviour()
@@ -100,8 +100,8 @@ function M.change_project_root()
 end
 
 local function setup_vim_commands()
+  vim.cmd'au BufEnter * call v:lua.neo_root_execute()'
   vim.cmd [[
-    command! NeoRoot v:lua.neo_root_execute()
     command! NeoRootSwitchMode lua require('neo-root').change_mode()
     command! NeoRootChange lua require('neo-root').change_project_root()
   ]]
