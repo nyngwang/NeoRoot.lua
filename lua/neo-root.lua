@@ -40,6 +40,7 @@ function M.change_mode()
 end
 
 function M.change_project_root()
+  CUR_MODE = BLUE_PILL
   local input = vim.fn.input('Set Project Root: ')
   if (input == '' or input:match('%s+')) then -- reset signal
     PROJ_ROOT = _PROJ_ROOT
