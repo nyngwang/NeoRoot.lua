@@ -31,6 +31,10 @@ function M.apply_change()
 end
 
 function M.change_mode()
+  if vim.api.nvim_win_get_config(0).relative ~= '' then
+    print('[NeoRoot] Cannot change mode in floating window.')
+    return
+  end
   if CUR_MODE == BLUE_PILL then
     CUR_MODE = RED_PILL
   elseif CUR_MODE == RED_PILL then
