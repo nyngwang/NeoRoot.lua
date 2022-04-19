@@ -6,13 +6,17 @@ local EXPR_NOREF_NOERR_TRUNC = { expr = true, noremap = true, silent = true, now
 RED_PILL = 1
 BLUE_PILL = 2
 -- globals
-CUR_MODE = RED_PILL
+CUR_MODE = BLUE_PILL
 _PROJ_ROOT = vim.fn.getcwd()
 PROJ_ROOT = vim.fn.getcwd() -- this cannot be relative path!
 
 local M = {}
 
 ---------------------------------------------------------------------------------------------------
+function M.setup(config)
+  CUR_MODE = config.CUR_MODE
+end
+
 function M.apply_change()
   -- NOTE: Don't use `string.find` to compare type, since empty string `''` will always match
   -- NOTE: Don't use `vim.opt.filetype`, since everyone set it locally.
