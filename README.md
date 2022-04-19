@@ -5,15 +5,16 @@ NeoRoot.lua
 
 https://user-images.githubusercontent.com/24765272/150794108-890b2ef3-3b4f-4fdb-8b47-0aa7f5d3ccf5.mov
 
-### New Intro.
+### New Intro. (updated 2022/04/19)
 
 With NeoRoot.lua, you will be able to:
 
-- Run `nvim MyProj` to open neovim with Project Root at `../somewhere/MyProj/`
-- During development, you can use toggle to temporarily change between `cwd` to your current buffer, and `../somewhere/MyProj/` .
-- During development, you can temporarily re-define your project root to, for example: `~/.config`. (shorthand `~`, `../`s are available :))
-  - if you want to change back to `../somewhere/MyProj/`, just leave the prompt blank. Simple
-- That's it!
+- Before starting NeoVim, first navigate to your project root(can be modified later)
+- Run `nvim .` to start your NeoVim. Now `NeoRoot` will enter `proj-mode`(see below) with the path you run `nvim .` as the root
+- During development, you can temporarily change the `cwd` to your current buffer.
+- During development, you can temporarily re-define your project root. For example: `~/.config`. (shorthand `~`, `../`s are supported!
+  - if you want to change back to `../somewhere/MyProj/`, just leave the prompt blank and hit Enter. Simple!
+
 
 ### Old Promo.
 
@@ -43,7 +44,12 @@ You can also change your project root __in the runtime__, without typing any com
 ```lua
 local NOREF_NOERR_TRUNC = { noremap = true, silent = true, nowait = true }
 use {
-  'nyngwang/NeoRoot.lua'
+  'nyngwang/NeoRoot.lua',
+  config = function()
+    require('neo-root').setup {
+      CUR_MODE = 2 -- 1 for file/buffer mode, 2 for proj-mode
+    }
+  end
 }
 vim.cmd'au BufEnter * NeoRoot'
 vim.keymap.set('n', '<Leader>p', function() vim.cmd('NeoRootSwitchMode') end, NOREF_NOERR_TRUNC)
