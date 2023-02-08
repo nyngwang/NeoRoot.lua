@@ -1,6 +1,21 @@
 NeoRoot.lua
 ---
 
+## This project is now deprecated
+
+Changing your project root (i.e. global current-directory, see `:h current-directory`)
+just for grepping files, showing less files on your file tree is not a good practice.
+If you once did this, you misused Vim.
+(To achieve the same result, you should always call `:tcd` instead.)
+
+Besides this, I will recommend you trying my new project session plugin: https://github.com/nyngwang/suave.lua,
+which follows this good practice:
+
+> Never touch the global current-directory unless you want to change to another project.
+
+and it's designed to help you restore your project with ease. (Now supports restoring colorscheme, too)
+
+
 ### DEMO
 
 https://user-images.githubusercontent.com/24765272/150794108-890b2ef3-3b4f-4fdb-8b47-0aa7f5d3ccf5.mov
